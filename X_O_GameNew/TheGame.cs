@@ -38,7 +38,7 @@ namespace X_O_GameNew
             Console.WriteLine("\tNastapi restart programu");
             Console.ResetColor();
             ConsoleHelper.Countinue();
-            Main(new string[0]);
+            Main(new string[0]); 
         }
         public static void ValidateMenuChoice(int userChoise, string typeOfMenu)
         {
