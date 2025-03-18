@@ -30,18 +30,21 @@ namespace X_O_GameNew
                 Console.WriteLine("\nWprowadź odpowiednią wartość.");
                 Console.ResetColor();
             }while (true);
-
         }
-        public static int GetUserChoise()
+
+        public static char GetcharByReadLine()
         {
-            Console.Write("\nWybrano opcje: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            int userChoice = GetIntByReadLine();
-            Console.ResetColor();
-            Console.WriteLine("");
-
-            return userChoice;
+            do
+            {
+                ConsoleKeyInfo inputValue = Console.ReadKey();
+                if (!char.IsDigit(inputValue.KeyChar))
+                {
+                    return inputValue.KeyChar;
+                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nWartość nie może być cyfrą.");
+                Console.ResetColor();
+            } while (true);
         }
-
     }
 }

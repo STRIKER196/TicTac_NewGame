@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using X_O_GameNew.Consts;
 using X_O_GameNew.Data;
 using X_O_GameNew.Interface;
+using X_O_GameNew.Players;
 
 namespace X_O_GameNew.Settings
 {
@@ -13,11 +14,9 @@ namespace X_O_GameNew.Settings
     {
         public static void LoadSettings()
         {
-            Menu.DisplayMenu(SettingsData.OptionMenuPl, MenuTextFields.settingsMenu);
+            Menu.PrintMenu(SettingsData.OptionMenuPl, MenuTextFields.settingsMenu);
 
-            int userChoise = ConsoleHelper.GetUserChoise();
-
-            TheGame.ValidateMenuChoice(userChoise, MenuTextFields.settingsMenu);
+            int userChoise = ConsoleHelper.GetIntByReadLine();
 
             LoadSettingProgram(userChoise);
         }
@@ -25,19 +24,22 @@ namespace X_O_GameNew.Settings
         private static void LoadCustomPlayerMarker()
         {
             Console.Clear();
-            Menu.DisplayMenu(SettingsData.CustomChangeMenuPL, MenuTextFields.setMarkerForPlayer);
-
-
-
+            Menu.PrintMenu(SettingsData.CustomChangeMenuPL, MenuTextFields.setMarkerForPlayer);
+            int editedPlayer = ConsoleHelper.GetIntByReadLine();
+            Console.Write("\nPodaj kształ znacznika jaki będzie wyświetlany dla Gracza.\nNowy znacznik:");
+            char newMarker = ConsoleHelper.GetcharByReadLine();
+            
+            Console.ReadKey();
         }
 
         private static void LoadCustomPlayerName()
         {
             Console.Clear();
-            Menu.DisplayMenu(SettingsData.CustomChangeMenuPL, MenuTextFields.setNameForPlayer);
+            Menu.PrintMenu(SettingsData.CustomChangeMenuPL, MenuTextFields.setNameForPlayer);
+            int userChoise = ConsoleHelper.GetIntByReadLine();
 
 
-
+            Console.ReadKey ();
         }
 
         private static void LoadSettingProgram(int userCHoise)
@@ -45,10 +47,10 @@ namespace X_O_GameNew.Settings
             switch (userCHoise)
             {
                 case 1:
-                    LoadCustomPlayerMarker();
+                    LoadCustomPlayerName();
                     break;
                 case 2:
-                    LoadCustomPlayerName();
+                    LoadCustomPlayerMarker();
                     break;
                 case 3:
                     TheGame.LoadMenu();

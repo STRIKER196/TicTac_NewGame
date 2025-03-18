@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using X_O_GameNew.Consts;
 using X_O_GameNew.Data;
 using X_O_GameNew.Interface;
+using X_O_GameNew.Players;
 using X_O_GameNew.Settings;
+
 
 
 namespace X_O_GameNew
@@ -16,18 +18,22 @@ namespace X_O_GameNew
     {
         static void Main(string[] args)
         {
-            LoadIntro();
+            Console.WriteLine("Testy");
 
+            //LoadIntro();
+            Menu.PrintMenuWithProporties(SettingsData.PlayersData(),"Właściwości Graczy");
             LoadMenu();
+
+
         }
 
         public static void LoadMenu()
         {
-            Menu.DisplayMenu(MenuData.MainMenuPl, MenuTextFields.mainManu);
+            Menu.PrintMenu(MenuData.MainMenuPl, MenuTextFields.mainManu);
             do
             {
-                int userChoise = ConsoleHelper.GetUserChoise();
-                ValidateMenuChoice(userChoise, MenuTextFields.mainManu);
+                int userChoise = ConsoleHelper.GetIntByReadLine();
+                ValidateMenuChoice(userChoise);
             }
             while (true);
         }
@@ -40,28 +46,17 @@ namespace X_O_GameNew
             ConsoleHelper.Countinue();
             Main(new string[0]); 
         }
-        public static void ValidateMenuChoice(int userChoise, string typeOfMenu)
+        public static void ValidateMenuChoice(int userChoise)
         {
-            if (typeOfMenu == MenuTextFields.mainManu)
+            if (userChoise > 0 && userChoise < 4)
             {
-                if (userChoise > 0 && userChoise < 4)
-                {
-                    Console.Clear();
-                    LoadProgram(userChoise);
-                }
+                Console.Clear();
+                LoadProgram(userChoise);
             }
-            else if (typeOfMenu == MenuTextFields.settingsMenu)
-            {
-                if (userChoise > 0 && userChoise < 3)
-                {
-                    Console.Clear();
-                    LoadProgram(userChoise);
-                }
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nBrak takiej opcji w menu.");
-                Console.ResetColor();
-                return;
-            }
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nBrak takiej opcji w menu.");
+            Console.ResetColor();
+            return;
         }
 
         private static void LoadProgram(int userChoise)
@@ -70,7 +65,6 @@ namespace X_O_GameNew
             {
                 case 1:
                 {
-                    ConsoleHelper.Countinue();
                     Console.ReadLine();
                     break;
                 }
